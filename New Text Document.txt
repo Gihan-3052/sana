@@ -110,5 +110,55 @@ docker stop "container_name"
 docker logs "container_name"
 
 
+*****
+
+
+flaskapp.py
+
+from flask import Flask
+app = Flask(__name__)
+@app.route('/')
+def counter():
+	return("This is FlaSK App Hello world")
+
+
+
+Dockerfile
+
+FROM python
+RUN mkdir /python
+WORKDIR /python
+COPY requirements.txt requirements.txt
+RUN pip install -r requirements.txt
+COPY . .
+CMD flask run --host=0.0.0.0 --port=5000
+
+
+
+requirements.txt
+
+Flask
+
+
+
+sudo docker build -t pythonflaskapp:latest .
+
+sudo docker run -it -p 5000:5000 -e FLASK_APP=flaskapp.py pythonflaskapp
+
+
+
+
+
+python.py
+
+x = int(input("Enter First Number :"))
+y = int(input("Enter second Number :"))
+z= x+y
+print("Total is :", z)
+
+python3 hello.py
+
+
+
 
 
