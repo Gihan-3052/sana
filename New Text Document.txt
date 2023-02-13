@@ -1,0 +1,114 @@
+version: '3'
+
+services:
+  wordpress:
+    image: wordpress
+    ports:
+      - "3000:80"
+    depends_on:
+      - db
+    volumes:
+      - wordpress_files:/var/www/html
+    environment:
+      WORDPRESS_DB_HOST: db:3306
+      WORDPRESS_DB_USER: wordpress
+      WORDPRESS_DB_PASSWORD: my_wp
+    restart: always
+
+  db:
+    image: mysql
+    volumes:
+      - db_data:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: mydb
+      MYSQL_DATABASE: wordpress
+      MYSQL_USER: wordpress
+      MYSQL_PASSWORD: my_wp
+    restart: always
+
+volumes:
+  wordpress_files:
+  db_data:
+**
+sudo docker compose up -d
+localhost3000
+  ***********
+python
+
+FROM python
+
+WORKDIR /app
+
+COPY . /app
+
+CMD ["python", "index.py"]
+*
+sudo docker build -t python .
+sudo docker run python
+
+
+
+*********
+html
+***
+FROM ubuntu
+MAINTAINER sani
+RUN apt-get update
+RUN apt-get install -y nginx 
+ADD index.html /var/www/html/index.nginx-debian.html
+COPY . /var/www/html
+EXPOSE 80 
+ENTRYPOINT ["/usr/sbin/nginx", "-g", "daemon off;"]
+
+**
+sudo docker build -t dd .
+sudo docker run -dt -p 8080:80 dd
+
+*****
+Q01).
+
+docker install cmd
+
+* Update package Index
+
+	$ sudo apt-get update
+
+* Install Package
+
+	sudo apt-get install \
+	 ca-certificates \
+	 curl \
+	 gnupg \
+	 lsb-release
+
+* Then need to add Docker’s official GPG key, to verify the signature.
+
+	$ curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor 
+	-o /usr/share/keyrings/docker-archive-keyring.gpg
+
+* Now update the package index and install the Docker by using this below command
+
+	$ sudo apt-get update
+	$ sudo apt-get install docker-ce docker-ce-cli containerd.io
+
+
+*hello world code
+
+	docker run hello-world
+
+
+basic cmd
+
+docker info
+docker version
+docker help
+docker images
+docker ps
+docker ps -a
+docker inspect "container_name"
+docker stop "container_name"
+docker logs "container_name"
+
+
+
+
